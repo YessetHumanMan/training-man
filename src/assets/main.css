@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .input {
+    @apply bg-zinc-800 border outline-none border-yellow-500 rounded-sm py-1 px-2 transition hover:border-yellow-700 text-yellow-500
+  }
+
+  .btn {
+    @apply bg-zinc-800 border outline-none hover:text-zinc-800 border-yellow-500 rounded-sm py-1 px-2 transition hover:border-yellow-700 text-yellow-500 hover:bg-yellow-500
+  }
+  }
