@@ -5,21 +5,21 @@ import { onAuthStateChanged, getAuth } from 'firebase/auth'
 
 
 
-const checkAuth = (to:RouteLocationNormalized, from:RouteLocationNormalized, next:NavigationGuardNext) => {
-  let isAuth = false
+// const checkAuth = (to:RouteLocationNormalized, from:RouteLocationNormalized, next:NavigationGuardNext) => {
+//   let isAuth = false
 
 
-  onAuthStateChanged(getAuth(), (user => {
-    if (user && !isAuth) {
-      isAuth = true
-      next()
-    } else if (!user && !isAuth) {
-      isAuth = true
-      next('/auth')
-    }
-  })
-  )
-}
+//   onAuthStateChanged(getAuth(), (user => {
+//     if (user && !isAuth) {
+//       isAuth = true
+//       next()
+//     } else if (!user && !isAuth) {
+//       isAuth = true
+//       next('/auth')
+//     }
+//   })
+//   )
+// }
 
 export const routes: RouteRecordRaw[] = [
   {
@@ -31,7 +31,7 @@ export const routes: RouteRecordRaw[] = [
     name: 'Home',
     path: '/',
     component: () => import('./pages/PageHome.vue'),
-    beforeEnter: checkAuth
+    // beforeEnter: checkAuth
   }
   ]
   
