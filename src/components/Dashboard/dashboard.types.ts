@@ -2,6 +2,7 @@ import { EnumStatus } from "../../types/dataClient"
 
 
 export interface ICard {
+  id: string
   name: string
   trainingMethod: string
   $createdAt: string

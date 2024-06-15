@@ -13,7 +13,7 @@ export const DASHBOARD_DATA: IColumn[] = [
   items: []
 },
 {
-  id: EnumStatus["done"],
+  id: EnumStatus.done,
   name: "To do",
   items: []
 },

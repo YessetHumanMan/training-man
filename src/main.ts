@@ -3,6 +3,7 @@ import { createPinia } from 'pinia'
 import PrimeVue from 'primevue/config';
 import './assets/main.css'
 import App from './App.vue'
+import { VueQueryPlugin } from '@tanstack/vue-query';
 import {router} from './router'
 import { Client } from 'appwrite';
 
@@ -13,4 +14,5 @@ createApp(App)
 .use(router)
 .use(pinia)
 .use(PrimeVue)
+.use(VueQueryPlugin)
 .mount('#app')
