@@ -1,48 +1,38 @@
 
-import {createWebHashHistory, createRouter, RouteRecordRaw, RouteParams } from 'vue-router'
-import {NavigationGuardNext, RouteLocationNormalized } from 'vue-router'
-import { onAuthStateChanged, getAuth } from 'firebase/auth'
+import {createWebHistory, createRouter, RouteRecordRaw } from 'vue-router'
+import { useUserStore } from './store/auth.user'
 
 
 
-// const checkAuth = (to:RouteLocationNormalized, from:RouteLocationNormalized, next:NavigationGuardNext) => {
-//   let isAuth = false
-
-
-//   onAuthStateChanged(getAuth(), (user => {
-//     if (user && !isAuth) {
-//       isAuth = true
-//       next()
-//     } else if (!user && !isAuth) {
-//       isAuth = true
-//       next('/auth')
-//     }
-//   })
-//   )
-// }
-
-export const routes: RouteRecordRaw[] = [
+const routes: RouteRecordRaw[] = [
   {
     name: 'Authorization',
     path: '/auth',
     component: () => import('./pages/PageAuthorization.vue'),
   },
   {
-    name: 'Home',
+    name: 'Dashboard',
     path: '/',
-    component: () => import('./pages/PageHome.vue'),
-    // beforeEnter: checkAuth
+    component: () => import('./pages/PageDashboard.vue'),
+    beforeEnter: (to, from, next) => {
+      const authStore = useUserStore();
+      if (!authStore.isAuth) {
+        next({
+          path: '/auth',
+        })
+      } else {
+        next();
+      }
+    }
   }
   ]
   
   export const router = createRouter({
-    history: createWebHashHistory(),
+    history: createWebHistory(),
     routes: routes
   })
 
-  export function routerPush(name:string,params?:RouteParams):ReturnType<typeof router.push>{
+  export function routerPush(name:string,params?:Record<string, string>):ReturnType<typeof router.push>{
     return params === undefined
     ? router.push({name})
-    : router.push({name, params})
-    }
-
+    : router.push({name, params})}

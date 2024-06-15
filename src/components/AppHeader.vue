@@ -1,30 +1,41 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import { useUserStore } from '../store/auth.user';
 import type { ComputedRef } from 'vue';
+import { account } from '../utils/appwrite';
+import { useRouter } from 'vue-router';
 
-const userStore = useUserStore()
+const router = useRouter()
+const authStore = useUserStore()
+
  interface IAppHeader {
    name: string
-   url: string
+   path: string
    icon: string
    show: ComputedRef<boolean>
  }
 
  const items = ref<IAppHeader[]>([
-   {
-     name: 'Home',
-     url: '/',
-     icon: 'pi pi-home',
-     show: computed((): boolean => !!userStore.userId)
+  {
+     name: 'Authorization',
+     path: '/auth',
+     icon: 'pi pi-key',
+     show: computed((): boolean => !authStore.isAuth)
    },
    {
-     name: 'Authorization',
-     url: '/auth',
-     icon: 'pi pi-key',
-     show: computed((): boolean => !userStore.userId)
+     name: 'Dashboard',
+     path: '/',
+     icon: 'pi pi-home',
+     show: computed((): boolean => !!authStore.isAuth)
    }
+   
  ])
+
+ const logout = async () => {
+  await account.deleteSession('current');
+  authStore.clear()
+  await router.push('/auth')
+ }
 
 
 
@@ -34,12 +45,14 @@ const userStore = useUserStore()
 <template>
   <header class="flex gap-5 py-5 px-3 w-full border text-yellow-500 border-yellow-500 bg-zinc-950">
     <div v-for="item in items" :key="item.name">
-      <router-link :to="item.url" class="hover:text-yellow-700 transition">
+      <div v-if="item.show">
+      <router-link :to="item.path" class="hover:text-yellow-700 transition">
         <span :class="item.icon"></span>
         <span>{{ item.name }}</span>
-        
       </router-link>
     </div>
+    </div>
+    <button v-if="authStore.isAuth" @click="logout()" class="ml-10">exit</button>
   </header>
 
   

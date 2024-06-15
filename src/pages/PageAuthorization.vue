@@ -1,16 +1,15 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useRouter } from "vue-router";
+import { account } from "../utils/appwrite";
 import { useUserStore } from "../store/auth.user";
-import { isGlobalLoding } from "../store/auth.user";
+import { v4 as uuid } from "uuid";
+import { isGlobalLoading } from "../store/loading";
 
-const userStore = useUserStore();
-const isLoading = isGlobalLoding();
+const isLoading = isGlobalLoading()
+const userStore = useUserStore()
+const router = useRouter()
 
-
-
-const router = useRouter();
-const isLogin = ref<boolean>(true);
 
 const name = ref<string>("");
 const email = ref<string>("");
@@ -29,39 +28,39 @@ function toggleConfirmPassword() {
 }
 
 
-// const signIn = async (): Promise<void> => {
-//   isLoading.set(true)
-//   const auth = getAuth();
-//   await signInWithEmailAndPassword(auth, email.value, password.value);
-//  const response = getAuth().currentUser as any;
-//  if(response){
-//     userStore.set({
-//       email: response.email,
-//       name: response.name,
-//       status: response.status
-//     })
-//     email.value = "";
-//     password.value = "";
-//     name.value = "";
+const signIn = async () => {
+  isLoading.set(true)
+  await account.createEmailPasswordSession(email.value, password.value);
+ const response = await account.get();
+ if(response){
+    userStore.set({
+      email: response.email,
+      name: response.name,
+      status: response.status
+    })
+ }
+    email.value = ""
+    name.value = ""
+    password.value = ""
+    
 
-//     await router.push("/");
-//     isLoading.set(false)
-//  }
+    await router.push("/");
+    isLoading.set(false)
+}
 
-// }
-
-// const signUp = async (): Promise<void> => {
+const signUp = async () => {
   
-//   await createUserWithEmailAndPassword(uuid(), email.value, password.value);
-//   await signIn();
+  await account.create(uuid(), email.value, password.value,name.value);
+  await signIn();
 
-// }
+}
 
 
 </script>
 
 <template>
-  <div class="container w-9/12 py-20 h-screen">
+  
+  <div class="container w-9/12 py-20">
     <div class="p-10 h-4/5">
       <div
         class="w-1/2 border shadow-yellow-500 shadow-lg border-yellow-500 text-center mb-5 mx-auto p-5 bg-zinc-950"

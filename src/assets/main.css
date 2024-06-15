@@ -4,7 +4,7 @@
 
 @layer components {
   .input {
-    @apply bg-zinc-800 border outline-none border-yellow-500 rounded-sm py-1 px-2 transition hover:border-yellow-700 text-yellow-500
+    @apply bg-zinc-950 border outline-none border-yellow-500 rounded-sm py-1 px-2 transition hover:border-yellow-700 text-yellow-500
   }
 
   .input-card {
@@ -12,6 +12,14 @@
   }
 
   .btn {
-    @apply bg-zinc-800 border w-full outline-none hover:text-zinc-800 border-yellow-500 rounded-sm py-1 px-2 transition hover:border-yellow-700 text-yellow-500 hover:bg-yellow-500
+    @apply bg-yellow-500 border w-full outline-none hover:text-zinc-800 border-yellow-500 rounded-sm py-1 px-2 transition hover:border-yellow-700 text-zinc-900 hover:bg-yellow-800
+  }
+
+  .btn-card {
+    @apply bg-yellow-500 border outline-none w-3 rounded-full hover:text-zinc-800 border-yellow-500 px-2 transition hover:border-yellow-700 text-zinc-900 hover:bg-yellow-800
+  }
+
+  .loader {
+    @apply w-screen h-screen flex justify-center items-center
   }
   }

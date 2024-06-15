@@ -15,32 +15,42 @@ const defauldValue: { user: IAuthUser} = {
   }
 }
 
-export const useUserStore = defineStore('authUser', {
-  state: () => defauldValue,
+
+const loadUserFromStorage = (): { user: IAuthUser } => {
+  const storedUser = localStorage.getItem('user');
+  if (storedUser) {
+    return { user: JSON.parse(storedUser) };
+  }
+  return defauldValue
+};
+
+const saveUserToStorage = (user: IAuthUser) => {
+  localStorage.setItem('user', JSON.stringify(user));
+};
+
+
+export const useUserStore = defineStore('user', {
+
+
+  
+  
+  state: () => loadUserFromStorage(),
   getters: {
     isAuth: state => state.user.status,
   },
   actions: {
     clear() {
-      this.$patch(defauldValue)
+      this.$patch(defauldValue);
+      localStorage.removeItem('user');
     },
     set(input: IAuthUser) {
       this.$patch({
         user: input
       })
+      saveUserToStorage(input);
     }
   }
-})
 
-export const isGlobalLoding = defineStore('isLoading', {
-  state: () => ({
-    isLoading: true
-  }),
-  actions: {
-    set(data: boolean) {
-      this.$patch({
-        isLoading: data
-      })
-    }
-  }
-})
+}
+)
+
