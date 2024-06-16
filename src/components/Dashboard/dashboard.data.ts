@@ -9,12 +9,12 @@ export const DASHBOARD_DATA: IColumn[] = [
 },
 {
   id: EnumStatus['in-progress'],
-  name: "To do",
+  name: "In progress",
   items: []
 },
 {
   id: EnumStatus.done,
-  name: "To do",
+  name: "Done",
   items: []
 },
 

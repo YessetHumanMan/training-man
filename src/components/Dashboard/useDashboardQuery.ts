@@ -7,7 +7,7 @@ import { IDeal } from "../../types/dataClient";
 
 
 
-export function useDashboardQuery()  {
+export function useDashboardQuery() {
  return useQuery({
    queryKey: ['dashboard'],
    queryFn: () => 
@@ -20,17 +20,18 @@ export function useDashboardQuery()  {
       const deals = data.documents as unknown as IDeal[]
 
       for(const deal of deals) {
-        const column = NewBoard.find(column => column.id === deal.status)
+        const column = NewBoard.find(col => col.id === deal.status)
         if(column) {
           column.items.push({
             $createdAt: deal.$createdAt,
-            id: deal.$id,
+            $id: deal.$id,
             name: deal.name,
             status: deal.status,
             trainingMethod: deal.dataClient.trainingGoal,
           })
         }
       }
+      return NewBoard
      }
    
  })
