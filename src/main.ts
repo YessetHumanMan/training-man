@@ -6,13 +6,16 @@ import App from './App.vue'
 import { VueQueryPlugin } from '@tanstack/vue-query';
 import {router} from './router'
 import { Client } from 'appwrite';
+import 'primeicons/primeicons.css'
+import { ValidationProvider, extend } from 'vee-validate';
 
 const pinia = createPinia()
 
+const app = createApp(App)
 
-createApp(App)
-.use(router)
-.use(pinia)
-.use(PrimeVue)
-.use(VueQueryPlugin)
-.mount('#app')
+
+app.use(router)
+app.use(pinia)
+app.use(PrimeVue)
+app.use(VueQueryPlugin)
+app.mount('#app')

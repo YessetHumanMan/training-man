@@ -61,6 +61,7 @@ const signUp = async () => {
 <template>
   
   <div class="container w-9/12 py-20">
+    
     <div class="p-10 h-4/5">
       <div
         class="w-1/2 border shadow-yellow-500 shadow-lg border-yellow-500 text-center mb-5 mx-auto p-5 bg-zinc-950"

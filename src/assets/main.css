@@ -7,16 +7,20 @@
     @apply bg-zinc-950 border outline-none border-yellow-500 rounded-sm py-1 px-2 transition hover:border-yellow-700 text-yellow-500
   }
 
+  .btn-logout {
+    @apply ml-10 hover:text-yellow-700 transition ml-auto
+  }
+
   .input-card {
     @apply bg-zinc-950 border-b border-opacity-40 outline-none border-yellow-500 rounded-sm py-3 px-2 transition hover:border-yellow-700 text-yellow-500
   }
 
   .btn {
-    @apply bg-yellow-500 border w-full outline-none hover:text-zinc-800 border-yellow-500 rounded-sm py-1 px-2 transition hover:border-yellow-700 text-zinc-900 hover:bg-yellow-800
+    @apply bg-yellow-500 border w-full outline-none hover:text-yellow-500 border-yellow-500 rounded-sm py-1 px-2 transition hover:border-yellow-700 text-zinc-900 hover:bg-yellow-800
   }
 
   .btn-card {
-    @apply bg-yellow-500 border outline-none w-3 rounded-full hover:text-zinc-800 border-yellow-500 px-2 transition hover:border-yellow-700 text-zinc-900 hover:bg-yellow-800
+    @apply bg-yellow-500 border outline-none w-full h-7 rounded-full hover:text-yellow-500 font-medium border-yellow-500 transition hover:border-yellow-700 text-zinc-900 hover:bg-yellow-800
   }
 
   .loader {
