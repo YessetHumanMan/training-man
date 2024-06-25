@@ -29,23 +29,21 @@ function toggleConfirmPassword() {
 
 
 const signIn = async () => {
-  isLoading.set(true)
+  
   await account.createEmailPasswordSession(email.value, password.value);
  const response = await account.get();
  if(response){
-    userStore.set({
-      email: response.email,
-      name: response.name,
-      status: response.status
-    })
- }
-    email.value = ""
-    name.value = ""
-    password.value = ""
-    
+   userStore.set({
+      email:response.email,
+      name:response.name,
+      status:response.status
+  })
+ } 
+ email.value = "",
+ password.value = "",
+ name.value = "",
+ await router.push("/")
 
-    await router.push("/");
-    isLoading.set(false)
 }
 
 const signUp = async () => {

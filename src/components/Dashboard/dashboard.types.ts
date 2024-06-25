@@ -1,4 +1,4 @@
-import { EnumStatus } from "../../types/dataClient"
+import { EnumStatus, IDeal } from "../../types/dataClient"
 
 
 export interface ICard {
@@ -13,4 +13,8 @@ export interface IColumn {
   id: EnumStatus
   name: string
   items: ICard[]
+}
+
+export interface IDealFormState extends Pick<IDeal ,"name" | 'price'> {
+  status: string
 }

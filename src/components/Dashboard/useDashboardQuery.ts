@@ -11,11 +11,13 @@ export function useDashboardQuery() {
  return useQuery({
    queryKey: ['dashboard'],
    queryFn: () => 
-     DB.listDocuments(DB_ID, COLLECTION_DEALS),
+      DB.listDocuments(DB_ID, COLLECTION_DEALS),
      select(data) {
+      
       const NewBoard: IColumn[] = DASHBOARD_DATA.map(column => ({
         ...column,
         items:[]
+
       }))
       const deals = data.documents as unknown as IDeal[]
 
@@ -27,9 +29,10 @@ export function useDashboardQuery() {
             $id: deal.$id,
             name: deal.name,
             status: deal.status,
-            trainingMethod: deal.dataClient.trainingGoal,
+            trainingMethod: deal.dataClient?.trainingGoal,
           })
         }
+        console.log(column)
       }
       return NewBoard
      }

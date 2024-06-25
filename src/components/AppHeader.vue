@@ -40,7 +40,7 @@ const authStore = useUserStore()
 </script>
 
 <template>
-  <header class="flex gap-5 py-5 px-3 w-full border text-yellow-500 border-yellow-500 bg-zinc-950 px-20">
+  <header  class="flex gap-5 py-5 w-full border text-yellow-500 border-yellow-500 bg-zinc-950 px-20">
     <div v-for="item in items" :key="item.name">
       <div v-if="item.show">
       <router-link :to="item.path" class="hover:text-yellow-700 transition">

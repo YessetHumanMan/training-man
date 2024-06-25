@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { ref } from "vue";
-
-import { ICard } from "../components/Dashboard/dashboard.types";
 import { useDashboardQuery } from "../components/Dashboard/useDashboardQuery";
 import  dayjs from "dayjs"
+import CreateDials  from "../components/CreateDials.vue";
 
-const dragCard = ref<ICard | null>(null);
-const sourceColumn = ref<ICard | null>(null);
-const { data, isLoading, refetch } = useDashboardQuery();
+// const dragCard = ref<ICard | null>(null);
+// const sourceColumn = ref<ICard | null>(null);
+const { data, isLoading, isError, error, refetch} = useDashboardQuery();
+
 </script>
 
 <template>
@@ -24,7 +24,7 @@ const { data, isLoading, refetch } = useDashboardQuery();
         <div class="rounded bg-black p-1 mb-4 text-yellow-500 text-center border border-yellow-500">
           {{ column.name }}
         </div>
-      
+          <CreateDials :status="column.id" :refetch="refetch" />
           <div draggable="true" v-for="card in column.items" :key="card.$id"
           class="flex flex-col bg-black text-yellow-500 border border-yellow-500 p-4 rounded-lg"
         >
@@ -34,8 +34,6 @@ const { data, isLoading, refetch } = useDashboardQuery();
           
           <button class="btn-card"><span class="pi pi-plus mr-3"></span>show more</button>
         </div>
-        
-        
       </div>
     </div>
   </div>
