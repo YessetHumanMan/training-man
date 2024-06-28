@@ -51,9 +51,9 @@ const onFormSubmit = ref<boolean>(false)
 <template>
   <div>
     <button @click="onFormSubmit = !onFormSubmit">Create</button>
-    <form v-if="onFormSubmit" @click="onSubmit">
+    <form v-if="onFormSubmit" @submit.prevent="onSubmit">
       <input type="text" v-model="name" v-bind="nameAtters">
-      <button>Create new Deal</button>
+      <button type="submit">Create new Deal</button>
     </form>
   </div>
 </template>
