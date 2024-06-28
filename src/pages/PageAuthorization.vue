@@ -57,7 +57,7 @@ function toggleConfirmPassword() {
 const handleLogin = async () => {
   try {
     await authStore.login(email.value,password.value);
-      this.$router.push('/dashboard')
+      router.push('/dashboard')
   } catch (error) {
     console.error('Login failed:', error);
   }
@@ -129,12 +129,12 @@ const handleLogin = async () => {
             <img v-else class="w-4 h-4" src="/password-show.svg" alt="" />
           </button>
           <div class="flex justify-between gap-3">
-            <button class="btn" @click="signIn">
+            <button class="btn" @click="handleLogin">
             LOGIN
           </button>
-          <button class="btn" @click="signUp">
+          <!-- <button class="btn" @click="signUp">
             SIGNUP
-          </button>
+          </button> -->
           </div>
           
         </form>

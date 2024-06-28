@@ -4,20 +4,21 @@ import { onMounted } from 'vue';
 import { useUserStore } from './store/auth.user';
 import { account } from './utils/appwrite';
 import { useRouter } from 'vue-router';
+import { ChatSession } from 'firebase/vertexai-preview';
+import { router } from './router';
 
-const router = useRouter()
 
 const authStore = useUserStore()
 
 onMounted(async () => {
-  
   try {
-    const user = await account.get()
-   if(user) authStore.set(user)
+    await authStore.checkSession();
   } catch (error) {
-    router.push('/auth')
-  } 
-})
+    console.error('Error during session check on mount:', error);
+    // Опционально, перенаправьте пользователя на страницу логина при ошибке
+    router.push('/auth');
+  }
+});
 
 
 </script>

@@ -26,7 +26,7 @@ export const useUserStore = defineStore('user', {
   actions: {
     async login(email: string, password: string) {
       try {
-        const response = await account.createSession(email, password);
+        const response = await account.createEmailPasswordSession(email, password);
         this.token = response.$id; // Получаем токен сессии
         localStorage.setItem('appwrite_token', response.$id);
       } catch (error) {

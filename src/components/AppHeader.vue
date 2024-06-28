@@ -37,21 +37,31 @@ const authStore = useUserStore()
 //   router.push('/auth')
 //  }
 
+const handleLogout = async () => {
+  try {
+    await authStore.logout();
+    router.push('/auth'); // Перенаправление на страницу логина после выхода
+  } catch (error) {
+    console.error('Logout failed:', error);
+  }
+};
+
 </script>
 
 <template>
   <header  class="flex gap-5 py-5 w-full border text-yellow-500 border-yellow-500 bg-zinc-950 px-20">
     <div v-for="item in items" :key="item.name">
-      
+      <div v-if="item.show">
       <router-link :to="item.path" class="hover:text-yellow-700 transition">
-        <div v-if="item.show">
+        
         <span :class="item.icon"></span>
         <span class="ml-2">{{ item.name }}</span>
-      </div>
+      
       </router-link>
     </div>
+    </div>
     
-    <button v-if="authStore.isAuth" @click="logout()" class="btn-logout">Exit<span class="pi pi-sign-out ml-3"></span></button>
+    <button v-if="authStore.login" @click="handleLogout()"  class="btn-logout">Exit<span class="pi pi-sign-out ml-3"></span></button>
   </header>
 
   

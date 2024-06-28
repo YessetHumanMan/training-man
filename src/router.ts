@@ -28,7 +28,7 @@ const routes: RouteRecordRaw[] = [
 
   ]
 
- const router = createRouter({
+export const router = createRouter({
     history: createWebHistory(),
     routes,
   })
@@ -36,7 +36,7 @@ const routes: RouteRecordRaw[] = [
   router.beforeEach((to, from, next) => {
     const authStore = useUserStore();
     if (to.meta.requiresAuth && !authStore.token) {
-      next('/login');
+      next('/auth');
     } else {
       next();
     }
