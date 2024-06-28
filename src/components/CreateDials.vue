@@ -36,7 +36,6 @@ const onFormSubmit = ref<boolean>(false)
    mutationKey:['create a new deal'],
    mutationFn: (data: IDealFormState) => DB.createDocument(DB_ID, COLLECTION_DEALS, uuid(), data),
    onSuccess(data) {
-    console.log(data)	
     props.refetch && props.refetch()
     resetForm()
    } 

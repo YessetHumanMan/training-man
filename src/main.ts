@@ -7,7 +7,7 @@ import {router} from './router'
 import { VueQueryPlugin } from '@tanstack/vue-query';
 import { Client } from 'appwrite';
 import 'primeicons/primeicons.css'
-// import { ValidationProvider, extend } from 'vee-validate';
+import { ValidationProvider, extend } from 'vee-validate';
 import { useUserStore } from './store/auth.user';
 
 const pinia = createPinia()

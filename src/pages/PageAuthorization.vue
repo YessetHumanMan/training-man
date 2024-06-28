@@ -57,7 +57,7 @@ function toggleConfirmPassword() {
 const handleLogin = async () => {
   try {
     await authStore.login(email.value,password.value);
-      router.push('/dashboard')
+      router.push('/')
   } catch (error) {
     console.error('Login failed:', error);
   }

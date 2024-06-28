@@ -20,16 +20,18 @@ const authStore = useUserStore()
      name: 'Authorization',
      path: '/auth',
      icon: 'pi pi-key',
-     show: computed((): boolean => !authStore.login)
+     show: computed((): boolean => !authStore.token)
    },
    {
      name: 'Dashboard',
      path: '/',
      icon: 'pi pi-home',
-     show: computed((): boolean => !!authStore.login)
+     show: computed((): boolean => !!authStore.token)
    }
    
  ])
+
+
 
 //  const logout = async () => {
 //   await account.deleteSession('current')
@@ -51,17 +53,17 @@ const handleLogout = async () => {
 <template>
   <header  class="flex gap-5 py-5 w-full border text-yellow-500 border-yellow-500 bg-zinc-950 px-20">
     <div v-for="item in items" :key="item.name">
-      <div v-if="item.show">
+      
       <router-link :to="item.path" class="hover:text-yellow-700 transition">
-        
+        <div v-if="item.show">
         <span :class="item.icon"></span>
         <span class="ml-2">{{ item.name }}</span>
-      
+        </div>
       </router-link>
     </div>
-    </div>
+   
     
-    <button v-if="authStore.login" @click="handleLogout()"  class="btn-logout">Exit<span class="pi pi-sign-out ml-3"></span></button>
+    <button v-if="authStore.token" @click="handleLogout()" class="btn-logout">Exit<span class="pi pi-sign-out ml-3"></span></button>
   </header>
 
   
