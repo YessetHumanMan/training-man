@@ -7,7 +7,7 @@ import { v4 as uuid } from "uuid";
 import { isGlobalLoading } from "../store/loading";
 
 const isLoading = isGlobalLoading()
-const userStore = useUserStore()
+const authStore = useUserStore()
 const router = useRouter()
 
 
@@ -28,32 +28,40 @@ function toggleConfirmPassword() {
 }
 
 
-const signIn = async () => {
+// const signIn = async () => {
   
-  await account.createEmailPasswordSession(email.value, password.value);
- const response = await account.get();
- if(response){
-   userStore.set({
-      email:response.email,
-      name:response.name,
-      status:response.status
-  })
- } 
- email.value = "",
- password.value = "",
- name.value = "",
- await router.push("/")
+//   await account.createEmailPasswordSession(email.value, password.value);
+//  const response = await account.get();
+//  if(response){
+//    userStore.set({
+//       email:response.email,
+//       name:response.name,
+//       status:response.status
+//   })
+//  } 
+//  email.value = "",
+//  password.value = "",
+//  name.value = "",
+//  await router.push("/")
 
-}
+// }
 
-const signUp = async () => {
+// const signUp = async () => {
   
-  await account.create(uuid(), email.value, password.value,name.value);
-  await signIn();
+//   await account.create(uuid(), email.value, password.value,name.value);
+//   await signIn();
 
+// }
+
+
+const handleLogin = async () => {
+  try {
+    await authStore.login(email.value,password.value);
+      this.$router.push('/dashboard')
+  } catch (error) {
+    console.error('Login failed:', error);
+  }
 }
-
-
 </script>
 
 <template>

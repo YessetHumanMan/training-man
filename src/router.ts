@@ -14,25 +14,35 @@ const routes: RouteRecordRaw[] = [
     name: 'Dashboard',
     path: '/',
     component: () => import('./pages/PageDashboard.vue'), meta: { requiresAuth: true },
-    beforeEnter: (to, from, next) => {
-      const authStore = useUserStore();
-      if (to.meta.requiresAuth && !authStore.isAuth) {
-        next(
-         '/auth',
-        )
-      } else {
-        next();
-      }
-    }
+    // beforeEnter: (to, from, next) => {
+    //   const authStore = useUserStore();
+    //   if (to.meta.requiresAuth && !authStore.token) {
+    //     next(
+    //      '/auth',
+    //     )
+    //   } else {
+    //     next();
+    //   }
+    // }
   }
+
   ]
-  
-  export const router = createRouter({
+
+ const router = createRouter({
     history: createWebHistory(),
-    routes: routes
+    routes,
   })
 
-  export function routerPush(name:string,params?:Record<string, string>):ReturnType<typeof router.push>{
-    return params === undefined
-    ? router.push({name})
-    : router.push({name, params})}
+  router.beforeEach((to, from, next) => {
+    const authStore = useUserStore();
+    if (to.meta.requiresAuth && !authStore.token) {
+      next('/login');
+    } else {
+      next();
+    }
+  });
+  
+  // export function routerPush(name:string,params?:Record<string, string>):ReturnType<typeof router.push>{
+  //   return params === undefined
+  //   ? router.push({name})
+  //   : router.push({name, params})}
