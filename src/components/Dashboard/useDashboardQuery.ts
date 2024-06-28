@@ -28,8 +28,7 @@ export function useDashboardQuery() {
             $createdAt: deal.$createdAt,
             $id: deal.$id,
             name: deal.name,
-            status: deal.status,
-            trainingMethod: deal.dataClient?.trainingGoal,
+            status: deal.status
           })
         }
         console.log(column)

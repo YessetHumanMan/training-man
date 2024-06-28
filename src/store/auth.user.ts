@@ -9,7 +9,7 @@ interface IAuthUser {
 }
 
 
-const defauldValue: { user: IAuthUser} = {
+const defaultValue: { user: IAuthUser} = {
   user: {
     email: '',
     name: '',
@@ -19,13 +19,13 @@ const defauldValue: { user: IAuthUser} = {
 
 export const useUserStore = defineStore('user', {
 
-  state: () => defauldValue,
+  state: () => defaultValue,
   getters: {
-    isAuth: state => state.user.status
+    isAuth: state => !!state.user.status,
   },
   actions: {
     clear() {
-      this.$patch(defauldValue);
+      this.$patch(defaultValue);
       
     },
     set(input: IAuthUser) {

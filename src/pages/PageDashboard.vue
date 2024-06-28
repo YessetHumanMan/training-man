@@ -29,7 +29,7 @@ const { data, isLoading, isError, error, refetch} = useDashboardQuery();
           class="flex flex-col bg-black text-yellow-500 border border-yellow-500 p-4 rounded-lg"
         >
           <h1 class="text-xl">{{ card.name }}</h1>
-          <span class="text-sm py-2">Target:  {{ card.trainingMethod }}</span>
+          <!-- <span class="text-sm py-2">Target:  {{ card.trainingGoal }}</span> -->
           <span class="text-sm py-2">{{ dayjs(card.$createdAt).format('DD.MM.YYYY') }}</span>
           
           <button class="btn-card"><span class="pi pi-plus mr-3"></span>show more</button>

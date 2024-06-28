@@ -13,7 +13,7 @@ onMounted(async () => {
   
   try {
     const user = await account.get()
-   authStore.set(user)
+   if(user) authStore.set(user)
   } catch (error) {
     router.push('/auth')
   } 

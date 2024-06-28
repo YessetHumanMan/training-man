@@ -13,13 +13,13 @@ const routes: RouteRecordRaw[] = [
   {
     name: 'Dashboard',
     path: '/',
-    component: () => import('./pages/PageDashboard.vue'),
+    component: () => import('./pages/PageDashboard.vue'), meta: { requiresAuth: true },
     beforeEnter: (to, from, next) => {
       const authStore = useUserStore();
-      if (!authStore.isAuth) {
-        next({
-          path: '/auth',
-        })
+      if (to.meta.requiresAuth && !authStore.isAuth) {
+        next(
+         '/auth',
+        )
       } else {
         next();
       }

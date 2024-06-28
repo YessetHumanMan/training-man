@@ -7,7 +7,6 @@ export interface IDataClient extends IBaseField {
  age: number
  height: number
  weight: number
- trainingGoal: string
  email: string
 }
 
@@ -21,5 +20,6 @@ export interface IDeal extends IBaseField {
 name: string
 dataClient: IDataClient
 status: EnumStatus
+trainingGoal: string
 price: number
 }

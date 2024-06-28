@@ -32,10 +32,11 @@ const onFormSubmit = ref<boolean>(false)
  const [price, priceAtters] = defineField('price')
 
 
- const { mutate } = useMutation({
+ const { mutate, isPending } = useMutation({
    mutationKey:['create a new deal'],
    mutationFn: (data: IDealFormState) => DB.createDocument(DB_ID, COLLECTION_DEALS, uuid(), data),
    onSuccess(data) {
+    console.log(data)	
     props.refetch && props.refetch()
     resetForm()
    } 
@@ -52,8 +53,7 @@ const onFormSubmit = ref<boolean>(false)
     <button @click="onFormSubmit = !onFormSubmit">Create</button>
     <form v-if="onFormSubmit" @click="onSubmit">
       <input type="text" v-model="name" v-bind="nameAtters">
-      <input type="text" v-model="price" v-bind="priceAtters">
-      <button type="submit">Create new Deal</button>
+      <button>Create new Deal</button>
     </form>
   </div>
 </template>
